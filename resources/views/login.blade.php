@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Login</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -21,13 +21,22 @@
     </style>
 </head>
 <body class="antialiased">
-<div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-    <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 dark:text-white">
-        <h1>{{$title}}</h1>
-        <p>
-            Login user.
-        </p>
+    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 dark:text-white">
+            <h1 class="text-center">Login</h1>
+            <form>
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username">
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <input type="submit" name="submit" value="Log in">
+                <a href="">Forgot password?</a>
+            </form>
+        </div>
     </div>
-</div>
 </body>
 </html>
