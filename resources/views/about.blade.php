@@ -21,24 +21,18 @@
         </style>
     </head>
     <body class="antialiased">
-        <nav class="relative flex bg-gray-100 dark:bg-gray-900">
-            <div class="underline text-gray-900 dark:text-white"><a href="/">Homepage</a></div>
-            <div class="underline text-gray-900 dark:text-white"><a href="/genshin-characters">Characters</a></div>
-            <div class="underline text-gray-900 dark:text-white"><a href="/about">About</a></div>
-            <div class="underline text-gray-900 dark:text-white"><a href="/login">Login</a></div>
-            <div class="underline text-gray-900 dark:text-white"><a href="/register">Register</a></div>
+        <nav>
+            <div><a href="/">Homepage</a></div>
+            <div><a href="/genshin-characters">Characters</a></div>
+            <div><a href="/about">About</a></div>
+            <div><a href="/login">Login</a></div>
+            <div><a href="/register">Register</a></div>
         </nav>
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-           <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 dark:text-white">
+        <div>
+           <div>
                <h1>{{$title}}</h1>
-               <p>
-                   Lorem ipsum.
-               </p>
-               <ul>
-               @foreach($characters as $character)
-                   <li>{{$character['name']}}</li>
-               @endforeach
-               </ul>
+               <p>{{$aboutWebsiteText}}</p>
+               <p>{{$infoAboutWebsite}}</p>
            </div>
         </div>
     </body>
