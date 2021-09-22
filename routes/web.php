@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/about', [App\Http\Controllers\AboutController::class, 'index']);
+
+Route::get('/login', function () {
+    return view('login');
+});
