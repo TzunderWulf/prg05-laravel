@@ -19,21 +19,28 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+
+        <link href="{{asset('css/app.css')}}" rel="stylesheet">
     </head>
     <body class="antialiased">
-        <nav>
-            <div><a href="/">Homepage</a></div>
-            <div><a href="/genshin-characters">Characters</a></div>
-            <div><a href="/about">About</a></div>
-            <div><a href="/login">Login</a></div>
-            <div><a href="/register">Register</a></div>
+        <nav class="navbar">
+            <div class="navbar-block">
+                <div class="nav-item"><a href="/">Homepage</a></div>
+                <div class="nav-item"><a href="/genshin-characters">Characters</a></div>
+                <div class="nav-item"><a href="/about">About</a></div>
+            </div>
+            <div class="navbar-block user-related-nav">
+{{--                if not logged in show, login and register button, else show  user profile --}}
+                <div class="nav-item"><a href="/login">Login</a></div>
+                <div class="nav-item"><a href="/register">Register</a></div>
+            </div>
         </nav>
-        <div>
-           <div>
+        <div class="content">
+            <main>
                <h1>{{$title}}</h1>
                <p>{{$aboutWebsiteText}}</p>
                <p>{{$infoAboutWebsite}}</p>
-           </div>
+            </main>
         </div>
     </body>
 </html>
