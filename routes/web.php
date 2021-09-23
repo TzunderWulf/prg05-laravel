@@ -17,9 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/genshin-characters', function () {
-    return view('genshin-characters');
-});
+Route::get('/genshin-characters', [App\Http\Controllers\GenshinCharacterController::class, 'returnCharacters']);
 
 Route::get('/about', [App\Http\Controllers\AboutController::class, 'index']);
 
