@@ -6,24 +6,52 @@
 
         <title>About</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
         <!-- Bootstrap CSS + Icons -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     </head>
     <body class="antialiased">
-        <nav class="navbar">
-            <div class="navbar-block">
-                <div class="nav-item"><a href="/">Homepage</a></div>
-                <div class="nav-item"><a href="/genshin-characters">Characters</a></div>
-                <div class="nav-item"><a href="/about">About</a></div>
-            </div>
-            <div class="navbar-block user-related-nav">
-{{--                if not logged in show, login and register button, else show  user profile --}}
-                <div class="nav-item"><a href="/login">Login</a></div>
-                <div class="nav-item"><a href="/register">Register</a></div>
+        <nav class="navbar navbar-expand-md navbar-light pt-3 pb-3 mb-5 shadow">
+            <div class="container-xxl">
+                <!-- navbar brand/title -->
+                <a href="" class="navbar-brand">
+                    <span class="text-primary fw-bold">Genshin Impact Wiki</span>
+                </a>
+
+                <!-- toggle button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
+                        aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- navbar links-->
+                <div class="collapse navbar-collapse justify-content-lg-between align-content-center" id="main-nav">
+                    <div class="navbar-nav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Characters</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="navbar-nav">
+                        <ul class="navbar-nav">
+                            <!-- if user is not logged in, show login/register -->
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Register</a>
+                            </li>
+                            <!-- if user is logged in, show user/profile link -->
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Username</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </nav>
         <div class="content">
