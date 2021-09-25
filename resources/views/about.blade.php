@@ -54,12 +54,14 @@
                 </div>
             </div>
         </nav>
-        <div class="content">
-            <main>
-               <h1>{{$title}}</h1>
-               <p>{{$aboutWebsiteText}}</p>
-               <p>{{$infoAboutWebsite}}</p>
-            </main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10 border m-2 pb-3">
+                    <h1>{{$title}}</h1>
+                    <p>{{$aboutWebsiteText}}</p>
+                    <p>{{$infoAboutWebsite}}</p>
+                </div>
+            </div>
         </div>
 
         <!-- Bootstrap JS -->
