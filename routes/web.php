@@ -17,17 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/genshin-characters', [App\Http\Controllers\GenshinCharacterController::class, 'returnCharacters']);
+Route::get('/genshin-characters', [App\Http\Controllers\GenshinCharacterController::class, 'index']);
 
 Route::get('/about', [App\Http\Controllers\AboutController::class, 'index']);
-
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/register', function () {
-    return view('register');
-});
 
 // forget password page
 
