@@ -20,3 +20,17 @@ Route::get('/', function () {
 Route::get('/genshin-characters', [App\Http\Controllers\GenshinCharacterController::class, 'returnCharacters']);
 
 Route::get('/about', [App\Http\Controllers\AboutController::class, 'index']);
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+// forget password page
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
