@@ -50,7 +50,7 @@
                                     <!-- if user is logged in, show user/profile link -->
                                     @if (Route::has('register'))
                                         <li class="nav-item">
-                                            <a href="" class="nav-link">Username</a>
+                                            <a href="{{ route('register') }}" class="nav-link">Register</a>
                                         </li>
                                     @endif
                                 @endauth
