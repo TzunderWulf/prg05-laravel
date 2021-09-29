@@ -20,7 +20,3 @@ Route::get('/', function () {
 Route::get('/genshin-characters', [App\Http\Controllers\GenshinCharacterController::class, 'returnCharacters']);
 
 Route::get('/about', [App\Http\Controllers\AboutController::class, 'index']);
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
