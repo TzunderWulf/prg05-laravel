@@ -21,12 +21,6 @@ Route::get('/genshin-characters', [App\Http\Controllers\GenshinCharacterControll
 
 Route::get('/about', [App\Http\Controllers\AboutController::class, 'index']);
 
-Route::get('/login', function () {
-    return view('login');
-});
+Auth::routes();
 
-Route::get('/register', function () {
-    return view('register');
-});
-
-// forget password page
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
