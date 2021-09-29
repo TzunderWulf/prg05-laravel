@@ -21,7 +21,7 @@
                 </div>
                 <div class="card-body">
                     <!-- img -->
-                    <h2 class="h4">character name</h2>
+                    <h2 class="h4">{{ $latestAddedCharacter['first_name'] }}</h2>
                     <p>character desc</p>
                     <a href="" class="btn btn-outline-primary">Read more...</a>
                 </div>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body">
                     <!-- -->
-                    <h2 class="h4">character name</h2>
+                    <h2 class="h4">{{ $latestEditedCharacter['first_name'] }}</h2>
                     <p>character desc</p>
                     <a href="" class="btn btn-outline-primary">Read more...</a>
                 </div>
