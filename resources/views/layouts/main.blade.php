@@ -28,7 +28,7 @@
                     <div class="navbar-nav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a href="{{ url('/genshin-characters') }}" class="nav-link">Characters</a>
+                                <a href="{{ url('/characters') }}" class="nav-link">Characters</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('/about') }}" class="nav-link">About</a>
