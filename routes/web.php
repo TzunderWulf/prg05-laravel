@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CharactersController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index']);
+Route::get('/', [WelcomeController::class, 'index']);
 
-Route::get('/genshin-characters', [App\Http\Controllers\GenshinCharacterController::class, 'index']);
+Route::get('/characters', [CharactersController::class, 'index']);
 
-Route::get('/about', [App\Http\Controllers\AboutController::class, 'index']);
+Route::get('/characters/{id}', [CharactersController::class, 'show']);
+
+Route::get('/about', [AboutController::class, 'index']);
 
 // forget password page
 
