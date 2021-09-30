@@ -34,6 +34,6 @@ class CreateCharactersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_characters');
+        Schema::dropIfExists('characters');
     }
 }
