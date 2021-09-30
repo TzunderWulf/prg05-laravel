@@ -20,10 +20,10 @@
                     <h1 class="h3">Latest addition</h1>
                 </div>
                 <div class="card-body">
-                    <!-- img -->
-                    <h2 class="h4">{{ $latestAddedCharacter['first_name'] }}</h2>
-                    <p>character desc</p>
-                    <a href="" class="btn btn-outline-primary">Read more...</a>
+                    <!-- image of character -->
+                    <h2 class="h4">{{ $latestAddedCharacter->first_name }} {{ $latestAddedCharacter->last_name }}</h2>
+                    <p>{{ \Illuminate\Support\Str::limit($latestAddedCharacter->description, 100) }}</p>
+                    <a href="/characters/{{ $latestAddedCharacter->id }}" class="btn btn-outline-primary">Read more...</a>
                 </div>
             </div>
             <div class="card">
@@ -31,10 +31,10 @@
                     <h1 class="h3">Latest edit</h1>
                 </div>
                 <div class="card-body">
-                    <!-- -->
-                    <h2 class="h4">{{ $latestEditedCharacter['first_name'] }}</h2>
-                    <p>character desc</p>
-                    <a href="" class="btn btn-outline-primary">Read more...</a>
+                    <!-- image of character -->
+                    <h2 class="h4">{{ $latestEditedCharacter['first_name'] }} {{ $latestEditedCharacter['last_name'] }}</h2>
+                    <p>{{ \Illuminate\Support\Str::limit($latestEditedCharacter->description, 100) }}</p>
+                    <a href="/characters/{{ $latestEditedCharacter->id }}" class="btn btn-outline-primary">Read more...</a>
                 </div>
             </div>
         </div>
