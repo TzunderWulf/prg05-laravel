@@ -12,7 +12,7 @@
                     <table class="table table-hover table-responsive align-middle">
                         <thead>
                         <tr>
-                            <th scope="col"></th>
+                            <th scope="col" class="w-25"></th>
                             <th scope="col">Name</th>
                             <th scope="col"></th>
                         </tr>
@@ -21,7 +21,7 @@
                         @foreach($favorites as $favorite)
                             <tr>
                                 <td>
-                                    <img class="img-fluid w-50" src="{{ asset('storage/uploads/' . $favorite->icon) }}"
+                                    <img class="img-fluid" src="{{ asset('storage/uploads/' . $favorite->icon) }}"
                                          alt="{{ $favorite->first_name }} {{ $favorite->last_name }}">
                                 </td>
                                 <td>{{ $favorite->first_name }} {{ $favorite->last_name }}</td>
@@ -45,22 +45,22 @@
                     <table id="createdCharacterTable" class="table table-hover table-responsive align-middle">
                         <thead>
                         <tr>
-                            <th scope="col"></th>
+                            <th scope="col" class="w-25"></th>
                             <th scope="col">Name</th>
                             <th scope="col"></th>
-                            <th scope="col">Active?</th>
+                            <th scope="col" class="text-center">Active?</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($createdCharacters as $createdCharacter)
                             <tr>
                                 <td>
-                                    <img class="img-fluid w-50" src="{{ asset('storage/uploads/' . $createdCharacter->icon) }}"
+                                    <img class="img-fluid" src="{{ asset('storage/uploads/' . $createdCharacter->icon) }}"
                                          alt="{{ $createdCharacter->first_name }} {{ $createdCharacter->last_name }}">
                                 </td>
                                 <td>{{ $createdCharacter->first_name }} {{ $createdCharacter->last_name }}</td>
                                 <td>
-                                    <a href=""
+                                    <a href="{{ route('edit', ['character' => $createdCharacter]) }}"
                                        class="btn btn-outline-primary">Edit character
                                         <i class="bi bi-arrow-right-circle-fill"></i>
                                     </a>
@@ -104,6 +104,23 @@
                                     <span class="input-group-text" id="name">E-mail</span>
                                     <input type="text" class="form-control" aria-label="Name" aria-describedby="name"
                                            value="{{ Auth::user()->email }}" readonly>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="name">Role</span>
+                                    <input type="text" class="form-control" aria-label="Name" aria-describedby="name"
+                                           readonly
+                                           @switch(Auth::user()->role)
+                                                @case(1)
+                                                    value="Editor"
+                                                    @break
+                                                @case(2)
+                                                    value="Admin"
+                                                    @break
+                                                @default
+                                                    value="User"
+                                                    @break
+                                           @endswitch
+                                           >
                                 </div>
                                 <a href="" class="btn btn-outline-primary w-100">Edit user <i class="bi bi-pencil-fill"></i></a>
                             </div>
