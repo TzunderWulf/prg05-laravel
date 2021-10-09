@@ -16,15 +16,15 @@ use App\Http\Controllers\WelcomeController;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/', [CharactersController::class, 'getLatest']);
 
+// Characters related
 Route::get('/characters', [CharactersController::class, 'index']);
+Route::get('/characters/{character}', [CharactersController::class, 'show'])->name('character.show');
 
-Route::get('/characters/{id}', [CharactersController::class, 'show']);
 
-Route::get('/about', [AboutController::class, 'index']);
-
-// forget password page
+Route::get('/add', [CharactersController::class, 'create'])->middleware('auth');
+Route::post('/store-form', [CharactersController::class, 'store'])->middleware('auth');
 
 Auth::routes();
 
