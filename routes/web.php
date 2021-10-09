@@ -25,6 +25,11 @@ Route::get('/characters/{character}', [CharactersController::class, 'show'])->na
 Route::get('/add', [CharactersController::class, 'create'])->middleware('auth');
 Route::post('/store-form', [CharactersController::class, 'store'])->middleware('auth');
 
+Route::get('/edit/{character}', [CharactersController::class, 'edit'])->middleware('auth')
+    ->name('edit');
+Route::post('/store-edit/{character}', [CharactersController::class, 'update'])->middleware('auth')
+    ->name('store-edit');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
