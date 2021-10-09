@@ -16,15 +16,11 @@ use App\Http\Controllers\WelcomeController;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/', [CharactersController::class, 'getLatest']);
 
-Route::get('/characters', [CharactersController::class, 'index']);
 
-Route::get('/characters/{id}', [CharactersController::class, 'show']);
 
-Route::get('/about', [AboutController::class, 'index']);
 
-// forget password page
 
 Auth::routes();
 

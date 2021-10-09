@@ -22,7 +22,11 @@ class CharactersController extends Controller
     public function getLatest()
     {
         //  Get the latest edit and added character
+        $latestAdd  = Character::all()->sortByDesc('created_at')->first();
+        $latestEdit = Character::all()->sortByDesc('updated_at')->first();
+
         // Return data to the 'welcome' page
+        return view('welcome', compact('latestAdd', 'latestEdit'));
     }
 
     public function create()
