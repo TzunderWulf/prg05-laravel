@@ -63,7 +63,9 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <p class="fw-bold">{{ \Illuminate\Support\Str::limit($character->description, 120)  }}</p>
+                            <p class="fw-bold fst-italic">
+                                {{ \Illuminate\Support\Str::limit($character->description, 120)  }}
+                            </p>
                             <a href="{{ route('character.show', ['character' => $character]) }}"
                                class="btn btn-outline-primary mb-3 w-100">
                                 Read more <i class="bi bi-arrow-right-circle-fill"></i>

@@ -11,8 +11,10 @@ class CharactersController extends Controller
 {
     public function index()
     {
-        // Index function to get all character out of database
+        // Index function to get all characters out of database, whose status is active
+        $characters = Character::all()->where('status', '=', 1);
 
+        return view('character.characters', compact('characters'));
     }
 
     public function show()
