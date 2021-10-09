@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Character;
 use App\Models\CharacterUser;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,9 +18,15 @@ class CharactersController extends Controller
         return view('character.characters', compact('characters'));
     }
 
-    public function show()
+    public function show(Character $character)
     {
-        // Show function to show one character's detail page
+        // Get all the tags connected to the character
+        $tags = Tag::leftJoin('character_tag', 'character_tag.tag_id', '=', 'tags.id')
+            ->where('character_id', $character->id)
+            ->get();
+
+        // Return the  view with character data and related tags
+        return view('character.character', compact('character', 'tags'));
     }
 
     public function getLatest()
