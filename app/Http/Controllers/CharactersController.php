@@ -7,6 +7,7 @@ use App\Models\CharacterUser;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CharactersController extends Controller
 {
@@ -96,18 +97,59 @@ class CharactersController extends Controller
         return redirect('/add')->with('status', 'Something went wrong, try again.');
     }
 
-    public function edit()
+    public function edit(Character $character)
     {
-        // Check if user's id == created_by, if not send away
-        // Show page for editing character
+        // Check if user's id == the id of the characters creator
+        if (Auth::id() == $character->created_by){
+            return view('character.edit', compact('character'));
+        }
+        return redirect('/');
     }
 
-    public function update()
+    public function update(Character $character, Request $request)
     {
-        // Validates the data coming out of form
-        // Checks if new images were sent trough
-        // Validates the images and stores them, remove old ones and stores hashes in database
-        // Store the rest of the data in database
+        // Validate the data coming out of the form
+        $validated = $request->validate([
+            'first-name' => 'required|max:255',
+            'last-name' => 'max:255',
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'birthday' => 'required|max:255'
+        ]);
+
+        // Save the file locally, if new files have been added, in the storage/public folder in an uploads folder
+        if ($request['icon'] !== null)
+        {
+            Storage::delete($character->icon);
+            $validated = $request->validate([
+                'icon' => 'required|image|mimes:jpeg,png'
+            ]);
+            $request->icon->store('uploads', 'public');
+            $character->icon = $request['icon']->hashName();
+        }
+        if ($request['portrait'] !== null)
+        {
+            Storage::delete($character->portrait);
+            $validated = $request->validate([
+                'portrait' => 'required|image|mimes:jpeg,png'
+            ]);
+            $request->portrait->store('uploads', 'public');
+            $character->portrait = $request['portrait']->hashName();
+        }
+
+        // Save all new values in the right column
+        $character->first_name = $request['first-name'];
+        $character->last_name = $request['last-name'];
+        $character->title = $request['title'];
+        $character->description = $request['description'];
+        $character->birthday = $request['birthday'];
+
+        // If record saved, send success notification otherwise notify user to try again
+        if ($character->save())
+        {
+            return redirect()->route('edit', ['character' => $character])->with('status', 'Character has been edited!');
+        }
+        return redirect()->route('edit', ['character' => $character])->with('status', 'Something went wrong, try again.');
     }
 
     public function changeStatus()
