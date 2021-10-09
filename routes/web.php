@@ -18,9 +18,13 @@ use App\Http\Controllers\WelcomeController;
 
 Route::get('/', [CharactersController::class, 'getLatest']);
 
+// Characters related
+Route::get('/characters', [CharactersController::class, 'index']);
+Route::get('/characters/{character}', [CharactersController::class, 'show'])->name('character.show');
 
 
-
+Route::get('/add', [CharactersController::class, 'create'])->middleware('auth');
+Route::post('/store-form', [CharactersController::class, 'store'])->middleware('auth');
 
 Auth::routes();
 
