@@ -28,7 +28,7 @@ class HomeController extends Controller
         $id = Auth::id();
 
         $favorites = Character::leftJoin('character_user', 'character_user.character_id', '=', 'characters.id')
-            ->where('user_id', Auth::id())
+            ->where('user_id', $id)
             ->get();
 
         $createdCharacters = Character::all()->where('created_by', $id);

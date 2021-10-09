@@ -8,7 +8,7 @@
                     <h1 class="h2">Favourites</h1>
                     <h2 class="h5 mb-3">All of your favourites in one place</h2>
                 </div>
-                @if (count($favorites) < 0)
+                @if (count($favorites) > 0)
                     <table class="table table-hover table-responsive align-middle">
                         <thead>
                         <tr>
@@ -60,7 +60,7 @@
                                 </td>
                                 <td>{{ $createdCharacter->first_name }} {{ $createdCharacter->last_name }}</td>
                                 <td>
-                                    <a href="{{ route('edit', ['character' => $createdCharacter->id]) }}"
+                                    <a href=""
                                        class="btn btn-outline-primary">Edit character
                                         <i class="bi bi-arrow-right-circle-fill"></i>
                                     </a>
@@ -69,9 +69,9 @@
                                     <form method="post">
                                         <input data-id="{{ $createdCharacter->id }}" class="btn-check toggle-status"
                                                type="checkbox" data-toggle="toggle" id="{{ $createdCharacter->first_name }}"
-                                               @if($createdCharacter->active) checked @endif>
+                                               @if($createdCharacter->status) checked @endif>
                                         <label class="btn btn-outline-primary w-100" for="{{ $createdCharacter->first_name }}">
-                                            {{ $createdCharacter->active ? "Active" : "Inactive" }}
+                                            {{ $createdCharacter->status ? "Active" : "Inactive" }}
                                         </label>
                                     </form>
                                 </td>
