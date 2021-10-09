@@ -17,6 +17,7 @@ use App\Http\Controllers\WelcomeController;
 */
 
 Route::get('/', [CharactersController::class, 'getLatest']);
+Route::get('/about', function() { return view('about'); });
 
 // Characters related
 Route::get('/characters', [CharactersController::class, 'index']);
