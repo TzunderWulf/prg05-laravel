@@ -48,14 +48,17 @@
                                         {{ Auth::user()->name }}
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ route('home') }}" class="dropdown-item"><i class="bi bi-person-circle"></i>  My profile</a></li>
+                                        <li><a href="{{ route('home') }}" class="dropdown-item">
+                                                <i class="bi bi-person-circle"></i>  My profile</a>
+                                        </li>
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                 <i class="bi bi-box-arrow-left"></i> {{ __('Logout') }}
                                             </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                  class="d-none">
                                                 @csrf
                                             </form>
                                         </li>
