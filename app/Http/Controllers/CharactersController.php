@@ -96,10 +96,13 @@ class CharactersController extends Controller
         return redirect('/add')->with('status', 'Something went wrong, try again.');
     }
 
-    public function edit()
+    public function edit(Character $character)
     {
-        // Check if user's id == created_by, if not send away
-        // Show page for editing character
+        // Check if user's id == the id of the characters creator
+        if (Auth::id() == $character->created_by){
+            return view('character.edit', compact('character'));
+        }
+        return redirect('/');
     }
 
     public function update()
