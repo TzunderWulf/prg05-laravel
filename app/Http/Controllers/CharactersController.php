@@ -12,6 +12,7 @@ class CharactersController extends Controller
     public function index()
     {
         // Index function to get all character out of database
+
     }
 
     public function show()
@@ -31,16 +32,59 @@ class CharactersController extends Controller
 
     public function create()
     {
-        // Validate if user is allowed on page, based on the amount of favorites
-        // Show the create page or redirect
+        $amountFavorites = CharacterUser::all()->where('user_id', Auth::id());
+
+        // Validate if user is allowed on page, based on the amount of favorites or role
+        if (count($amountFavorites) >= 5 || Auth::user()->role === 2)
+        {
+            // Show the create page
+            return view('character.create');
+        }
+
+        return redirect('/');
     }
 
     public function store(Request $request)
     {
         // Validate the data coming out of the form
-        // Save the file locally in the storage/public folder in an 'uploads' folder
+        $validated = $request->validate([
+            'first-name' => 'required|max:255',
+            'last-name' => 'max:255',
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'region' => 'required',
+            'element' => 'required',
+            'birthday' => 'required|max:255',
+            'icon' => 'required|image|mimes:jpeg,png',
+            'portrait' => 'required|image|mimes:jpeg,png'
+        ]);
+
+        // Save the file locally in the storage/public folder in an uploads folder
+        $request->icon->store('uploads', 'public');
+        $request->portrait->store('uploads', 'public');
+
+        $userId = Auth::id();
+
         // Store the entire record
+        $character = new Character([
+            "first_name" => $request['first-name'],
+            "last_name" => $request['last-name'],
+            "title" => $request['title'],
+            "description" => $request['description'],
+            "region" => $request['region'],
+            "element" => $request['element'],
+            "birthday" => $request['birthday'],
+            "icon" => $request['icon']->hashName(),
+            "portrait" => $request['portrait']->hashName(),
+            "created_by" => $userId
+        ]);
+
         // If record saved, send success notification otherwise notify user to try again
+        if ($character->save())
+        {
+            return redirect('/add')->with('status', 'Character added!');
+        }
+        return redirect('/add')->with('status', 'Something went wrong, try again.');
     }
 
     public function edit()
