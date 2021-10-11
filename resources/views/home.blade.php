@@ -1,4 +1,8 @@
 @extends('layouts.main')
+@section('head-data')
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+@endsection
 
 @section('content')
     <div class="container">
@@ -66,14 +70,10 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <form method="post">
-                                        <input data-id="{{ $createdCharacter->id }}" class="btn-check toggle-status"
-                                               type="checkbox" data-toggle="toggle" id="{{ $createdCharacter->first_name }}"
-                                               @if($createdCharacter->status) checked @endif>
-                                        <label class="btn btn-outline-primary w-100" for="{{ $createdCharacter->first_name }}">
-                                            {{ $createdCharacter->status ? "Active" : "Inactive" }}
-                                        </label>
-                                    </form>
+                                    <input data-id="{{$createdCharacter->id}}" class="toggle-class" type="checkbox"
+                                           data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                           data-on="Active" data-off="Inactive"
+                                           {{ $createdCharacter->status ? 'checked' : '' }}>
                                 </td>
                             </tr>
                         @endforeach
@@ -135,4 +135,6 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('js/main.js') }}"></script>
 @endsection
