@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Character;
+use App\Models\CharacterTag;
 use App\Models\CharacterUser;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -33,8 +34,14 @@ class CharactersController extends Controller
     public function getLatest()
     {
         //  Get the latest edit and added character
-        $latestAdd  = Character::all()->sortByDesc('created_at')->first();
-        $latestEdit = Character::all()->sortByDesc('updated_at')->first();
+        $latestAdd  = Character::all()
+            ->where('status' ,'=', '1')
+            ->sortByDesc('created_at')
+            ->first();
+        $latestEdit = Character::all()
+            ->where('status' ,'=', '1')
+            ->sortByDesc('updated_at')
+            ->first();
 
         // Return data to the 'welcome' page
         return view('welcome', compact('latestAdd', 'latestEdit'));
