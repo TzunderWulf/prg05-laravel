@@ -73,7 +73,8 @@ class CharactersController extends Controller
             'element' => 'required',
             'birthday' => 'required|max:255',
             'icon' => 'required|image|mimes:jpeg,png',
-            'portrait' => 'required|image|mimes:jpeg,png'
+            'portrait' => 'required|image|mimes:jpeg,png',
+            'tags' => 'required|max:255',
         ]);
 
         // Save the file locally in the storage/public folder in an uploads folder
@@ -96,12 +97,30 @@ class CharactersController extends Controller
             "created_by" => $userId
         ]);
 
-        // If record saved, send success notification otherwise notify user to try again
-        if ($character->save())
-        {
+        // Make sure the character saves right
+        if ($character->save()) {
+            // Get all tags out of input and split them (by ',')
+            $tagNames = explode(',', $validated['tags']);
+
+            // For each tag, check if record exists in tags database
+            foreach ($tagNames as $tagName) {
+                // If not create new tag and get id
+                $tag = Tag::where('name', '=', $tagName)->firstOrCreate([
+                    'name' => $tagName
+                ]);
+
+                // Get tag_id and character_id, put them together in character_tag table
+                $connBetweenCharacterTag = new CharacterTag([
+                    'character_id' => $character->id,
+                    'tag_id' => $tag->id
+                ]);
+
+                // Save the connection between the character and tag
+                $connBetweenCharacterTag->save();
+            }
             return redirect('/add')->with('status', 'Character added!');
         }
-        return redirect('/add')->with('status', 'Something went wrong, try again.');
+        return redirect('/add')->with('status', 'Something went wrong saving, try again.');
     }
 
     public function edit(Character $character)

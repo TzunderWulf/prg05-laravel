@@ -34,8 +34,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold" id="last-name">Last name:</span>
                         <input class="form-control" type="text" name="last-name"
-                               placeholder="e.g. Ragnvindr" aria-label="Last name" aria-describedby="last-name"
-                               required>
+                               placeholder="e.g. Ragnvindr" aria-label="Last name" aria-describedby="last-name">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold" id="title">Secondary title*:</span>
@@ -76,7 +75,7 @@
                         <input class="form-control" type="text" name="birthday" placeholder="e.g. April 30th"
                                aria-label="Birthday" aria-describedby="birthday" required>
                     </div>
-                    <div>
+                    <div class="mb-4">
                         <div class="mb-3">
                             <p class="fw-bold" id="icon">Icon*:</p>
                             <input class="form-control" type="file" name="icon" aria-label="Icon image"
@@ -88,6 +87,15 @@
                                    aria-describedby="portrait" required>
                         </div>
                     </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text fw-bold" id="tags">Tags*:</span>
+                            <input class="form-control" type="text" name="tags" placeholder="e.g. tag-1, tag-2"
+                                   aria-label="Tags, separate tags with a comma" aria-describedby="tags" required>
+                        </div>
+                        <p class="fst-italic">Seperate tags with comma, like so: Mondstadt, Male, Pyro</p>
+                    </div>
+
                     <div class="mb-3">
                         <input class="btn btn-outline-success w-100" type="submit" name="submit" value="Add character">
                     </div>
