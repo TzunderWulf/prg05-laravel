@@ -34,6 +34,18 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Character whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Character whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $title
+ * @property string $region
+ * @property string $icon
+ * @property string $portrait
+ * @property int $created_by
+ * @property int $status
+ * @method static \Illuminate\Database\Eloquent\Builder|Character whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Character whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Character wherePortrait($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Character whereRegion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Character whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Character whereTitle($value)
  */
 class Character extends Model
 {
