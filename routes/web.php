@@ -19,17 +19,27 @@ Route::get('/about', function() { return view('about'); });
 
 // Characters related
 Route::get('/characters', [CharactersController::class, 'index']);
-Route::get('/characters/{character}', [CharactersController::class, 'show'])->name('character.show');
+Route::get('/characters/{character}', [CharactersController::class, 'show'])
+    ->name('character.show');
 
 
-Route::get('/add', [CharactersController::class, 'create'])->middleware('auth');
-Route::post('/store-form', [CharactersController::class, 'store'])->middleware('auth');
+Route::get('/add', [CharactersController::class, 'create'])
+    ->middleware('auth');
+Route::post('/store-form', [CharactersController::class, 'store'])
+    ->middleware('auth');
 
-Route::get('/edit/{character}', [CharactersController::class, 'edit'])->middleware('auth')
+Route::get('/edit/{character}', [CharactersController::class, 'edit'])
+    ->middleware('auth')
     ->name('edit');
-Route::post('/store-edit/{character}', [CharactersController::class, 'update'])->middleware('auth')
+Route::post('/store-edit/{character}', [CharactersController::class, 'update'])
+    ->middleware('auth')
     ->name('store-edit');
+
+Route::post('/change-status', [CharactersController::class, 'changeStatus'])
+    ->middleware('auth')
+    ->name('change-status');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home');
