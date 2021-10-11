@@ -25,7 +25,7 @@ class CreateCharactersTable extends Migration
             $table->string('icon');
             $table->string('portrait');
             $table->foreignId('created_by');
-            $table->boolean('status')->default('1');
+            $table->boolean('status')->default(1);
             $table->timestamps();
 
             $table->foreign('created_by')->references('id')->on('users');
