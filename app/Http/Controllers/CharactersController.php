@@ -77,15 +77,15 @@ class CharactersController extends Controller
 
         // Store the entire record
         $character = new Character([
-            "first_name" => $request['first-name'],
-            "last_name" => $request['last-name'],
-            "title" => $request['title'],
-            "description" => $request['description'],
-            "region" => $request['region'],
-            "element" => $request['element'],
-            "birthday" => $request['birthday'],
-            "icon" => $request['icon']->hashName(),
-            "portrait" => $request['portrait']->hashName(),
+            "first_name" => $validated['first-name'],
+            "last_name" => $validated['last-name'],
+            "title" => $validated['title'],
+            "description" => $validated['description'],
+            "region" => $validated['region'],
+            "element" => $validated['element'],
+            "birthday" => $validated['birthday'],
+            "icon" => $validated['icon']->hashName(),
+            "portrait" => $validated['portrait']->hashName(),
             "created_by" => $userId
         ]);
 
@@ -125,7 +125,7 @@ class CharactersController extends Controller
                 'icon' => 'required|image|mimes:jpeg,png'
             ]);
             $request->icon->store('uploads', 'public');
-            $character->icon = $request['icon']->hashName();
+            $character->icon = $validated['icon']->hashName();
         }
         if ($request['portrait'] !== null)
         {
@@ -134,15 +134,15 @@ class CharactersController extends Controller
                 'portrait' => 'required|image|mimes:jpeg,png'
             ]);
             $request->portrait->store('uploads', 'public');
-            $character->portrait = $request['portrait']->hashName();
+            $character->portrait = $validated['portrait']->hashName();
         }
 
         // Save all new values in the right column
-        $character->first_name = $request['first-name'];
-        $character->last_name = $request['last-name'];
-        $character->title = $request['title'];
-        $character->description = $request['description'];
-        $character->birthday = $request['birthday'];
+        $character->first_name = $validated['first-name'];
+        $character->last_name = $validated['last-name'];
+        $character->title = $validated['title'];
+        $character->description = $validated['description'];
+        $character->birthday = $validated['birthday'];
 
         // If record saved, send success notification otherwise notify user to try again
         if ($character->save())
@@ -152,9 +152,10 @@ class CharactersController extends Controller
         return redirect()->route('edit', ['character' => $character])->with('status', 'Something went wrong, try again.');
     }
 
-    public function changeStatus()
+    public function changeStatus(Request $request)
     {
-        // Find the character in database
-        // Change status, based on current one
+        $character = Character::findOrFail($request['character-id']);
+        $character->status = $request->status;
+        $character->save();
     }
 }
