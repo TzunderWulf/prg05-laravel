@@ -6,40 +6,31 @@
             <h1>All characters currently in the archive</h1>
             <h2 class="h5">Total amount: {{ count($characters) }}</h2>
         </div>
-        <form method="post">
-            <div class="row mb-5 mx-auto align-items-center">
-                <div class="col col-auto">
-                    <p class="h5">Filter:</p>
-                </div>
-                <div class="col col-auto">
-                    <input type="checkbox" class="btn-check" id="tag-1" value="Mondstadt" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="tag-1">Mondstadt</label>
-                </div>
-                <div class="col col-auto">
-                    <input type="checkbox" class="btn-check" id="tag-2" value="Liyue" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="tag-2">Liyue</label>
-                </div>
-                <div class="col col-auto">
-                    <input type="checkbox" class="btn-check" id="tag-3" value="Pyro" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="tag-3">Pyro</label>
-                </div>
-                <div class="col col-auto">
-                    <input type="checkbox" class="btn-check" id="tag-4" value="Cryo" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="tag-4">Cryo</label>
-                </div>
-                <div class="col col-auto">
-                    <input type="checkbox" class="btn-check" id="tag-5" value="Male" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="tag-5">Male</label>
-                </div>
-                <div class="col input-group border-start border-primary border-3">
-                    <span class="input-group-text" id="search"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" aria-label="Search for tag" aria-describedby="search">
-                </div>
-                <div class="col col-auto">
-                    <input type="submit" class="btn btn-outline-success" value="Search">
-                </div>
+        <div class="row mx-auto mb-5">
+            <div class="col col-auto">
+                <form class="row">
+                    @foreach ($newestTags as $tag)
+                        <div class="col">
+                            <input type="checkbox" class="btn-check" id="tag-{{$tag->id}}" value="{{$tag->name}}"
+                                   autocomplete="off">
+                            <label class="btn btn-outline-primary" for="tag-{{$tag->id}}">{{$tag->name}}</label>
+                        </div>
+                    @endforeach
+                </form>
             </div>
-        </form>
+            <div class="col">
+                <form method="get" action="" class="row">
+                    <div class="col input-group border-start border-primary border-3">
+                        <span class="input-group-text" id="search"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" aria-label="Search for tag" aria-describedby="search"
+                               name="search">
+                    </div>
+                    <div class="col">
+                        <input type="submit" class="btn btn-outline-success" value="Search">
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="row row-cols-md-3 mb-5 mx-auto">
             @foreach($characters as $character)
                 <div class="col-3 my-1">
