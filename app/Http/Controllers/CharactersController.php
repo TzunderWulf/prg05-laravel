@@ -12,12 +12,29 @@ use Illuminate\Support\Facades\Storage;
 
 class CharactersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Index function to get all characters out of database, whose status is active
-        $characters = Character::all()->where('status', '=', 1);
+        if (!$request['search'])
+        {
+            // Index function to get all characters out of database, whose status is active
+            $characters = Character::all()
+                ->where('status', '=', 1);
+        }
+        else
+        {
+            $validated = $request->validate([
+                'search' => 'required|max:255'
+            ]);
 
-        return view('character.characters', compact('characters'));
+            $characters = Character::where('status', '=', 1)
+                ->where('region', 'like', '%'.$validated['search'].'%')
+                ->orWhere('first_name', 'like', '%'.$validated['search'].'%')
+                ->orWhere('element', 'like', '%'.$validated['search'].'%')
+                ->get();
+        }
+        $newestTags = Tag::latest()->take(5)->get();
+
+        return view('character.characters', compact('characters', 'newestTags'));
     }
 
     public function show(Character $character)
