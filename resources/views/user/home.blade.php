@@ -66,7 +66,7 @@
                                 <td>
                                     <a href="{{ route('edit', ['character' => $createdCharacter]) }}"
                                        class="btn btn-outline-primary">Edit character
-                                        <i class="bi bi-arrow-right-circle-fill"></i>
+                                        <i class="bi bi-pencil-fill"></i>
                                     </a>
                                 </td>
                                 <td>
