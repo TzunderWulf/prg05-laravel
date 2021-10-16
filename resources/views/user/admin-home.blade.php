@@ -1,4 +1,8 @@
 @extends('layouts.main')
+@section('head-data')
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+@endsection
 
 @section('content')
     <div class="container">
@@ -41,8 +45,42 @@
         </div>
         <div class="row mx-auto mb-4">
             <div class="col border">
-                <p>All characters, filter characters on status.</p>
-                <p>Be able to edit character for quality and content control.</p>
+                <div class="mt-2 mb-4 pt-3 border-bottom border-primary border-2">
+                    <h1 class="h2">All characters currently on the archive</h1>
+                </div>
+                <table id="latestChanges" class="table table-hover table-responsive align-middle">
+                    <thead>
+                    <tr>
+                        <th scope="col">Character</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($characters as $character)
+                        <tr>
+                            <td>{{ $character->first_name }} {{ $character->last_name }}</td>
+                            <td>
+                                <input data-id="{{$character->id}}" class="toggle-class" type="checkbox"
+                                       data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                       data-on="Active" data-off="Inactive"
+                                    {{ $character->status ? 'checked' : '' }}>
+                            </td>
+                            <td>
+                                <a href="{{ route('edit', ['character' => $character]) }}" class="btn btn-outline-primary w-auto">
+                                    Edit character <i class="bi bi-pencil-fill"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/characters/{{$character->id}}" class="btn btn-outline-primary w-auto">
+                                    See character <i class="bi bi-arrow-right-circle-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
