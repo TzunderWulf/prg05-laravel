@@ -144,7 +144,7 @@ class CharactersController extends Controller
     public function edit(Character $character)
     {
         // Check if user's id == the id of the characters creator
-        if (Auth::id() == $character->created_by){
+        if (Auth::id() == $character->created_by || Auth::user()->role === 2){
             return view('character.edit', compact('character'));
         }
         return redirect('/');
@@ -203,7 +203,7 @@ class CharactersController extends Controller
         $character->save();
     }
 
-    public function showLatestChanges()
+    public function showLatestChanges(Request $request)
     {
         // Get the latest changes and add username of creator to show on the admin 'homepage'
         $latestChanges = Character::leftJoin('users', 'characters.created_by', '=', 'users.id')
@@ -212,6 +212,20 @@ class CharactersController extends Controller
             ->limit(5)
             ->get();
 
-        return view('user.admin-home', compact('latestChanges'));
+        dd($request);
+//
+//        if (!$request['filter'])
+//        {
+//            $characters = Character::all();
+//        } else {
+//            $characters = Character::where('active', '=', $request['filter']);
+//        }
+//
+//        return view('user.admin-home', compact('latestChanges', 'characters'));
+    }
+
+    public function changeFilterGroup()
+    {
+        // change the list the admin sees, based on filter
     }
 }
