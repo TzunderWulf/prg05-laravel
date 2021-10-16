@@ -59,6 +59,11 @@
                                         <li><a href="{{ route('home') }}" class="dropdown-item">
                                                 <i class="bi bi-person-circle"></i>  My profile</a>
                                         </li>
+                                        @if(Auth::user()->role === 2)
+                                            <li><a href="{{ route('admin-home') }}" class="dropdown-item">
+                                                    <i class="bi bi-tools"></i>  Admin page</a>
+                                            </li>
+                                        @endif
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
@@ -90,6 +95,11 @@
         </div>
     </div>
 </nav>
-@yield('content')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    @yield('content')
+</body>
+<script src="{{ asset('js/main.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous">
+</script>
 
