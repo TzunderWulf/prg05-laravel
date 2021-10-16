@@ -202,4 +202,16 @@ class CharactersController extends Controller
         $character->status = $request->status;
         $character->save();
     }
+
+    public function showLatestChanges()
+    {
+        // Get the latest changes and add username of creator to show on the admin 'homepage'
+        $latestChanges = Character::leftJoin('users', 'characters.created_by', '=', 'users.id')
+            ->latest()
+            ->select('users.name as creator_name', 'characters.*')
+            ->limit(5)
+            ->get();
+
+        return view('user.admin-home', compact('latestChanges'));
+    }
 }

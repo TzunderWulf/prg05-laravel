@@ -11,28 +11,24 @@
                     <thead>
                         <tr>
                             <th scope="col">Character</th>
-                            <th scope="col">Edited by</th>
+                            <th scope="col">Created by</th>
                             <th scope="col">Modified date</th>
                             <th scope="col" class="w-25"></th>
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach($latestChanges as $change)
                         <tr>
-                            <td>Character first name and last name</td>
-                            <td>Either person who created it or edited it</td>
-                            <td>Date and time of update</td>
-                            <td>Go to character page</td>
-                        </tr>
-                        <tr>
-                            <td>Diluc Ragnvindr</td>
-                            <td>diluc</td>
-                            <td>2021-10-09 14:00</td>
+                            <td>{{ $change->first_name }} {{ $change->last_name }}</td>
+                            <td>{{ $change->creator_name }}</td>
+                            <td>{{ $change->updated_at }}</td>
                             <td>
-                                <a href="/characters/1" class="btn btn-outline-primary w-auto">
+                                <a href="/characters/{{$change->id}}" class="btn btn-outline-primary w-auto">
                                     See character <i class="bi bi-arrow-right-circle-fill"></i>
                                 </a>
                             </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
