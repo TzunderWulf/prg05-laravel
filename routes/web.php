@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CharactersController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,10 @@ use App\Http\Controllers\CharactersController;
 Route::get('/', [CharactersController::class, 'getLatest']);
 Route::get('/about', function() { return view('about'); });
 
-// Characters related
+// Character related business
 Route::get('/characters', [CharactersController::class, 'index']);
 Route::get('/characters/{character}', [CharactersController::class, 'show'])
     ->name('character.show');
-
 
 Route::get('/add', [CharactersController::class, 'create'])
     ->middleware('auth');
@@ -41,5 +41,7 @@ Route::post('/change-status', [CharactersController::class, 'changeStatus'])
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+Route::get('/home', [HomeController::class, 'index'])
     ->name('home');
+Route::get('/admin-home', [CharactersController::class, 'showLatestChanges'])
+    ->name('admin-home');
