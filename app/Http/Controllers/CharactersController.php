@@ -203,29 +203,21 @@ class CharactersController extends Controller
         $character->save();
     }
 
-    public function showLatestChanges(Request $request)
+    public function showLatestChanges()
     {
-        // Get the latest changes and add username of creator to show on the admin 'homepage'
-        $latestChanges = Character::leftJoin('users', 'characters.created_by', '=', 'users.id')
-            ->latest()
-            ->select('users.name as creator_name', 'characters.*')
-            ->limit(5)
-            ->get();
+        if (Auth::user()->role === 2)
+        {
+            // Get the latest changes and add username of creator to show on the admin 'homepage'
+            $latestChanges = Character::leftJoin('users', 'characters.created_by', '=', 'users.id')
+                ->latest()
+                ->select('users.name as creator_name', 'characters.*')
+                ->limit(5)
+                ->get();
 
-        dd($request);
-//
-//        if (!$request['filter'])
-//        {
-//            $characters = Character::all();
-//        } else {
-//            $characters = Character::where('active', '=', $request['filter']);
-//        }
-//
-//        return view('user.admin-home', compact('latestChanges', 'characters'));
-    }
+            $characters = Character::all();
 
-    public function changeFilterGroup()
-    {
-        // change the list the admin sees, based on filter
+            return view('user.admin-home', compact('latestChanges', 'characters'));
+        }
+        return redirect('/');
     }
 }
