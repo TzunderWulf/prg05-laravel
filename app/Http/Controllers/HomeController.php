@@ -33,6 +33,6 @@ class HomeController extends Controller
 
         $createdCharacters = Character::all()->where('created_by', $id);
 
-        return view('home', compact('favorites', 'createdCharacters'));
+        return view('user.home', compact('favorites', 'createdCharacters'));
     }
 }
