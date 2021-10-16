@@ -9,6 +9,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class CharactersController extends Controller
 {
@@ -16,22 +17,25 @@ class CharactersController extends Controller
     {
         if (!$request['search'])
         {
-            // Index function to get all characters out of database, whose status is active
+            // Get all characters out of database, whose status is active, if no search or tags is done/seen
             $characters = Character::all()
                 ->where('status', '=', 1);
         }
         else
         {
+            // Validate the input
             $validated = $request->validate([
                 'search' => 'required|max:255'
             ]);
 
+            // Do a query, based on the search
             $characters = Character::where('status', '=', 1)
                 ->where('region', 'like', '%'.$validated['search'].'%')
                 ->orWhere('first_name', 'like', '%'.$validated['search'].'%')
                 ->orWhere('element', 'like', '%'.$validated['search'].'%')
                 ->get();
         }
+        // Get back the five newest tags added to the database
         $newestTags = Tag::latest()->take(5)->get();
 
         return view('character.characters', compact('characters', 'newestTags'));
@@ -66,15 +70,12 @@ class CharactersController extends Controller
 
     public function create()
     {
-        $amountFavorites = CharacterUser::all()->where('user_id', Auth::id());
-
         // Validate if user is allowed on page, based on the amount of favorites or role
+        $amountFavorites = CharacterUser::all()->where('user_id', Auth::id());
         if (count($amountFavorites) >= 5 || Auth::user()->role === 2)
         {
-            // Show the create page
             return view('character.create');
         }
-
         return redirect('/');
     }
 
