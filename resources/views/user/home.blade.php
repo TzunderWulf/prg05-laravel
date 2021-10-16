@@ -31,7 +31,7 @@
                                 <td>{{ $favorite->first_name }} {{ $favorite->last_name }}</td>
                                 <td>
                                     <a href="/characters/{{ $favorite->id }}" class="btn btn-outline-primary">
-                                        Go to character <i class="bi bi-arrow-right-circle-fill"></i>
+                                        See character <i class="bi bi-arrow-right-circle-fill"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -135,6 +135,4 @@
             </div>
         </div>
     </div>
-
-    <script src="{{ asset('js/main.js') }}"></script>
 @endsection
