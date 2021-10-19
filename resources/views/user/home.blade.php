@@ -12,7 +12,7 @@
                     <h1 class="h2">Favourites</h1>
                     <h2 class="h5 mb-3">All of your favourites in one place</h2>
                 </div>
-                @if (count($favorites) > 0)
+                @if (count($favorites->characters) > 0)
                     <table class="table table-hover table-responsive align-middle">
                         <thead>
                         <tr>
@@ -22,11 +22,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($favorites as $favorite)
+                        @foreach($favorites->characters as $favorite)
                             <tr>
                                 <td>
-                                    <img class="img-fluid" src="{{ asset('storage/uploads/' . $favorite->icon) }}"
-                                         alt="{{ $favorite->first_name }} {{ $favorite->last_name }}">
+                                    <div class="mx-auto w-50">
+                                        <img class="img-fluid" src="{{ asset('storage/uploads/' . $favorite->icon) }}"
+                                             alt="{{ $favorite->first_name }} {{ $favorite->last_name }}">
+                                    </div>
                                 </td>
                                 <td>{{ $favorite->first_name }} {{ $favorite->last_name }}</td>
                                 <td>
@@ -59,8 +61,11 @@
                         @foreach($createdCharacters as $createdCharacter)
                             <tr>
                                 <td>
-                                    <img class="img-fluid" src="{{ asset('storage/uploads/' . $createdCharacter->icon) }}"
-                                         alt="{{ $createdCharacter->first_name }} {{ $createdCharacter->last_name }}">
+                                    <div class="mx-auto w-50">
+                                        <img class="img-fluid"
+                                             src="{{ asset('storage/uploads/' . $createdCharacter->icon) }}"
+                                             alt="{{ $createdCharacter->first_name }} {{ $createdCharacter->last_name }}">
+                                    </div>
                                 </td>
                                 <td>{{ $createdCharacter->first_name }} {{ $createdCharacter->last_name }}</td>
                                 <td>
@@ -81,7 +86,7 @@
                             <h2 class="h4 text-center">No created characters yet.</h2>
                             <h2 class="h6 fst-italic text-center px-3">
                                 To be able to create characters, you need at least five favourites. You currently
-                                have {{ count($favorites) }} favourites.
+                                have {{ count($favorites->characters) }} favourites.
                             </h2>
                         @endif
                         </tbody>
@@ -127,7 +132,7 @@
                         </div>
                     @endauth
                 @endif
-                @if (count($favorites) >= 5 || Auth::user()->role == 2)
+                @if (count($favorites->characters) >= 5 || Auth::user()->role == 2)
                     <div class="border rounded text-center py-4 mb-3">
                         <a href="/add" class="btn btn-outline-primary w-auto">Add new character to archive</a>
                     </div>

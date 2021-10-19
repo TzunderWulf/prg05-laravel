@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Character;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,13 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
+        $favorites = User::find(Auth::id());
 
-        $favorites = Character::leftJoin('character_user', 'character_user.character_id', '=', 'characters.id')
-            ->where('user_id', $id)
-            ->get();
-
-        $createdCharacters = Character::all()->where('created_by', $id);
+        $createdCharacters = Character::all()->where('created_by', Auth::id());
 
         return view('user.home', compact('favorites', 'createdCharacters'));
     }
