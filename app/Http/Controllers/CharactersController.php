@@ -6,6 +6,7 @@ use App\Models\Character;
 use App\Models\CharacterTag;
 use App\Models\CharacterUser;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -44,9 +45,7 @@ class CharactersController extends Controller
     public function show(Character $character)
     {
         // Get all the tags connected to the character
-        $tags = Tag::leftJoin('character_tag', 'character_tag.tag_id', '=', 'tags.id')
-            ->where('character_id', $character->id)
-            ->get();
+        $tags = Character::find($character->id);
 
         // Return the  view with character data and related tags
         return view('character.character', compact('character', 'tags'));
