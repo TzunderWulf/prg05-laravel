@@ -26,4 +26,12 @@ class Tag extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    /**
+     * The characters that belong to the tag.
+     */
+    public function characters()
+    {
+        return $this->belongsToMany(Character::class);
+    }
 }

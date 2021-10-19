@@ -61,4 +61,12 @@ class Character extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    /**
+     * The tags that belong to the character.
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
