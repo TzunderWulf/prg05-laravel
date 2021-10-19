@@ -53,4 +53,12 @@ class Character extends Model
 
     protected $fillable = ['first_name', 'last_name', 'title', 'description', 'region', 'element', 'birthday',
         'icon', 'portrait', 'created_by'];
+
+    /**
+     * The users that belong to the character.
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
