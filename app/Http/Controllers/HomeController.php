@@ -26,9 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $favorites = User::find(Auth::id());
+        $favorites = User::find(Auth::id())->characters;
 
-        $createdCharacters = Character::all()->where('created_by', Auth::id());
+        $createdCharacters = User::find(Auth::id())->createdCharacters;
 
         return view('user.home', compact('favorites', 'createdCharacters'));
     }

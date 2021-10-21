@@ -52,7 +52,7 @@ class Character extends Model
     use HasFactory;
 
     protected $fillable = ['first_name', 'last_name', 'title', 'description', 'region', 'element', 'birthday',
-        'icon', 'portrait', 'created_by'];
+        'icon', 'portrait', 'user_id'];
 
     /**
      * The users that belong to the character.
@@ -68,5 +68,13 @@ class Character extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    /**
+     * The users that belong to the character.
+     */
+    public function createdByUser()
+    {
+        return $this->belongsTo(User::class);
     }
 }

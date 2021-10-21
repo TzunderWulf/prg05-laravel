@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Character::class);
     }
+
+    public function createdCharacters()
+    {
+        return $this->hasMany(Character::class);
+    }
 }

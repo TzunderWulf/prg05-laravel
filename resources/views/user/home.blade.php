@@ -12,7 +12,7 @@
                     <h1 class="h2">Favourites</h1>
                     <h2 class="h5 mb-3">All of your favourites in one place</h2>
                 </div>
-                @if (count($favorites->characters) > 0)
+                @if (count($favorites) > 0)
                     <table class="table table-hover table-responsive align-middle">
                         <thead>
                         <tr>
@@ -22,7 +22,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($favorites->characters as $favorite)
+                        @foreach($favorites as $favorite)
                             <tr>
                                 <td>
                                     <div class="mx-auto w-50">
@@ -86,7 +86,7 @@
                             <h2 class="h4 text-center">No created characters yet.</h2>
                             <h2 class="h6 fst-italic text-center px-3">
                                 To be able to create characters, you need at least five favourites. You currently
-                                have {{ count($favorites->characters) }} favourites.
+                                have {{ count($favorites) }} favourites.
                             </h2>
                         @endif
                         </tbody>
@@ -132,7 +132,7 @@
                         </div>
                     @endauth
                 @endif
-                @if (count($favorites->characters) >= 5 || Auth::user()->role == 2)
+                @if (count($favorites) >= 5 || Auth::user()->role == 2)
                     <div class="border rounded text-center py-4 mb-3">
                         <a href="/add" class="btn btn-outline-primary w-auto">Add new character to archive</a>
                     </div>
