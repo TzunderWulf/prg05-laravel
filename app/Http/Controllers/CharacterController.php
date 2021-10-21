@@ -219,4 +219,19 @@ class CharacterController extends Controller
         }
         return redirect('/');
     }
+
+    public function storeFavourite(Character $character)
+    {
+        $user = User::find(Auth::id());
+
+        if($user->characters->contains($character))
+        {
+            $user->characters()->detach($character->id);
+        } else
+        {
+            $user->characters()->attach($character->id);
+        }
+
+        return redirect('/characters');
+    }
 }
