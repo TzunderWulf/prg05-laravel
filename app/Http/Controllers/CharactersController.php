@@ -111,7 +111,7 @@ class CharactersController extends Controller
             "birthday" => $validated['birthday'],
             "icon" => $validated['icon']->hashName(),
             "portrait" => $validated['portrait']->hashName(),
-            "created_by" => $userId
+            "user_id" => $userId
         ]);
 
         // Make sure the character saves right
@@ -143,7 +143,7 @@ class CharactersController extends Controller
     public function edit(Character $character)
     {
         // Check if user's id == the id of the characters creator
-        if (Auth::id() == $character->created_by || Auth::user()->role === 2){
+        if (Auth::id() == $character->user_id || Auth::user()->role === 2){
             return view('character.edit', compact('character'));
         }
         return redirect('/');
@@ -207,7 +207,7 @@ class CharactersController extends Controller
         if (Auth::user()->role === 2)
         {
             // Get the latest changes and add username of creator to show on the admin 'homepage'
-            $latestChanges = Character::leftJoin('users', 'characters.created_by', '=', 'users.id')
+            $latestChanges = Character::leftJoin('users', 'characters.user_id', '=', 'users.id')
                 ->latest()
                 ->select('users.name as creator_name', 'characters.*')
                 ->limit(5)
