@@ -28,12 +28,15 @@ Route::middleware('auth')->group(function() {
     Route::post('/store-form', [CharacterController::class, 'store']);
 
     Route::get('/edit/{character}', [CharacterController::class, 'edit'])
-        ->name('edit');
+        ->name('character.edit');
     Route::post('/store-edit/{character}', [CharacterController::class, 'update'])
         ->name('store-edit');
 
     Route::post('/change-status', [CharacterController::class, 'changeStatus'])
         ->name('change-status');
+
+    Route::get('/favourite/{character}', [CharacterController::class, 'storeFavourite'])
+        ->name('character.favourite');
 });
 
 Auth::routes();
