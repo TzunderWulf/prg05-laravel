@@ -24,11 +24,11 @@ class CreateCharactersTable extends Migration
             $table->string('birthday');
             $table->string('icon');
             $table->string('portrait');
-            $table->foreignId('created_by');
+            $table->foreignId('user_id');
             $table->boolean('status')->default(1);
             $table->timestamps();
 
-            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
