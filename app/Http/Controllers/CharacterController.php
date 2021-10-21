@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
-class CharactersController extends Controller
+class CharacterController extends Controller
 {
     public function index(Request $request)
     {
@@ -45,7 +45,7 @@ class CharactersController extends Controller
     public function show(Character $character)
     {
         // Get all the tags connected to the character
-        $tags = Character::find($character->id);
+        $tags = Character::find($character->id)->tags;
 
         // Return the  view with character data and related tags
         return view('character.character', compact('character', 'tags'));
@@ -202,7 +202,7 @@ class CharactersController extends Controller
         $character->save();
     }
 
-    public function showLatestChanges()
+    public function showAdminDashboard()
     {
         if (Auth::user()->role === 2)
         {
