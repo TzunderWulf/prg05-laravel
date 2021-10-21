@@ -42,25 +42,29 @@
                                 <div class="col-auto">
                                     <h1 class="h3">{{ $character->first_name }} {{ $character->last_name }}</h1>
                                 </div>
-                                @if (Route::has('login'))
-                                    @auth
-                                        <div class="col-auto">
-                                            <button class="btn btn-lg border border-0">
-                                                <i class="bi bi-star"></i>
-                                            </button>
-                                        </div>
-                                    @endauth
-                                @endif
                             </div>
                         </div>
                         <div class="card-body">
                             <p class="fw-bold fst-italic">
                                 {{ \Illuminate\Support\Str::limit($character->description, 120)  }}
                             </p>
-                            <a href="{{ route('character.show', ['character' => $character]) }}"
-                               class="btn btn-outline-primary mb-3 w-100">
-                                Read more <i class="bi bi-arrow-right-circle-fill"></i>
-                            </a>
+                            <div class="mb-3">
+                                <a href="{{ route('character.show', ['character' => $character]) }}"
+                                   class="btn btn-outline-primary w-100 mb-3">
+                                    Read more <i class="bi bi-arrow-right-circle-fill"></i>
+                                </a>
+                                @if (Route::has('login'))
+                                    <a href="{{ route('character.favourite', ['character' => $character]) }}"
+                                       class="btn w-100 @if($character->users->contains(Auth::id()))
+                                           btn-warning @else btn-outline-warning @endif">
+                                        @if ($character->users->contains(Auth::id()))
+                                            Remove from favourites <i class="bi bi-star-fill"></i>
+                                        @else
+                                            Add to favourites <i class="bi bi-star"></i>
+                                        @endif
+                                    </a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
