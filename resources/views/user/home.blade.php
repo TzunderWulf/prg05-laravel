@@ -133,8 +133,11 @@
                     @endauth
                 @endif
                 @if (count($favorites) >= 5 || Auth::user()->role == 2)
-                    <div class="border rounded text-center py-4 mb-3">
-                        <a href="/add" class="btn btn-outline-primary w-auto">Add new character to archive</a>
+                    <div class="border rounded p-3">
+                        <div class="mx-auto text-center">
+                            <h1 class="h3 pb-3 border-bottom border-primary border-2">Create new character</h1>
+                            <a href="/add" class="btn btn-outline-primary mt-3">Add new character to archive</a>
+                        </div>
                     </div>
                 @endif
             </div>

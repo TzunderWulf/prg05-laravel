@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row mx-3 mb-5">
-            <div class="col-8 border border-1">
+            <div class="col-8 border border-1 rounded">
                 <div class="text-center mt-2 mb-4 border-bottom border-primary border-2">
                     <h1 class="h2">The Genshin Impact Archive</h1>
                     <h2 class="h5 mb-3">Find all the information you need</h2>

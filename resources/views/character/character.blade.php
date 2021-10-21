@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row mx-3 mb-5">
-            <div class="col-7 border m-2 pb-3 align-self-start">
+            <div class="col-7 border rounded m-2 pb-3 align-self-start">
                 <h1 class="h2 mt-3">{{ $character->first_name }} {{ $character->last_name }}</h1>
                 <p>{{ $character->description }}</p>
-                @if(count($tags->tags) !== 0)
-                    @foreach($tags->tags as $tag)
+                @if(count($tags) !== 0)
+                    @foreach($tags as $tag)
                         <a href="" class="btn btn-primary">{{ $tag->name }}</a>
                     @endforeach
                 @endif

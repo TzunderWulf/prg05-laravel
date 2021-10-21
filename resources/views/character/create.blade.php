@@ -17,7 +17,7 @@
             </div>
         @endif
         <div class="row mx-3 mb-5 justify-content-center">
-            <div class="col-lg-7 border border-2 shadow p-4">
+            <div class="col-lg-7 border rounded border shadow p-4">
                 <div class="mb-4 text-center">
                     <h1 class="h2">Add new character to the archive</h1>
                     <h2 class="fst-italic h5">The fields with a star are required.</h2>
