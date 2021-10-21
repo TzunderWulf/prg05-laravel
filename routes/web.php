@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CharactersController;
+use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -15,33 +15,31 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [CharactersController::class, 'getLatest']);
+Route::get('/', [CharacterController::class, 'getLatest']);
 Route::get('/about', function() { return view('about'); });
 
 // Character related business
-Route::get('/characters', [CharactersController::class, 'index']);
-Route::get('/characters/{character}', [CharactersController::class, 'show'])
+Route::get('/characters', [CharacterController::class, 'index']);
+Route::get('/characters/{character}', [CharacterController::class, 'show'])
     ->name('character.show');
 
-Route::get('/add', [CharactersController::class, 'create'])
-    ->middleware('auth');
-Route::post('/store-form', [CharactersController::class, 'store'])
-    ->middleware('auth');
+Route::middleware('auth')->group(function() {
+    Route::get('/add', [CharacterController::class, 'create']);
+    Route::post('/store-form', [CharacterController::class, 'store']);
 
-Route::get('/edit/{character}', [CharactersController::class, 'edit'])
-    ->middleware('auth')
-    ->name('edit');
-Route::post('/store-edit/{character}', [CharactersController::class, 'update'])
-    ->middleware('auth')
-    ->name('store-edit');
+    Route::get('/edit/{character}', [CharacterController::class, 'edit'])
+        ->name('edit');
+    Route::post('/store-edit/{character}', [CharacterController::class, 'update'])
+        ->name('store-edit');
 
-Route::post('/change-status', [CharactersController::class, 'changeStatus'])
-    ->middleware('auth')
-    ->name('change-status');
+    Route::post('/change-status', [CharacterController::class, 'changeStatus'])
+        ->name('change-status');
+});
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])
     ->name('home');
-Route::get('/admin-home', [CharactersController::class, 'showLatestChanges'])
+Route::get('/admin-home', [CharacterController::class, 'showAdminDashboard'])
+    ->middleware('auth')
     ->name('admin-home');
