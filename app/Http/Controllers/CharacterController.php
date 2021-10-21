@@ -190,9 +190,9 @@ class CharacterController extends Controller
         // If record saved, send success notification otherwise notify user to try again
         if ($character->save())
         {
-            return redirect()->route('edit', ['character' => $character])->with('status', 'Character has been edited!');
+            return redirect()->route('character.edit', ['character' => $character])->with('status', 'Character has been edited!');
         }
-        return redirect()->route('edit', ['character' => $character])->with('status', 'Something went wrong, try again.');
+        return redirect()->route('character.edit', ['character' => $character])->with('status', 'Something went wrong, try again.');
     }
 
     public function changeStatus(Request $request)
