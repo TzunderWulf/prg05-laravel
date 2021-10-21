@@ -160,24 +160,23 @@ class CharacterController extends Controller
             'birthday' => 'required|max:255'
         ]);
 
+
         // Save the file locally, if new files have been added, in the storage/public folder in an uploads folder
         if ($request['icon'] !== null)
         {
-            Storage::delete($character->icon);
-            $validated = $request->validate([
+            $validatedIcon = $request->validate([
                 'icon' => 'required|image|mimes:jpeg,png'
             ]);
             $request->icon->store('uploads', 'public');
-            $character->icon = $validated['icon']->hashName();
+            $character->icon = $validatedIcon['icon']->hashName();
         }
         if ($request['portrait'] !== null)
         {
-            Storage::delete($character->portrait);
-            $validated = $request->validate([
+            $validatedPortrait = $request->validate([
                 'portrait' => 'required|image|mimes:jpeg,png'
             ]);
             $request->portrait->store('uploads', 'public');
-            $character->portrait = $validated['portrait']->hashName();
+            $character->portrait = $validatedPortrait['portrait']->hashName();
         }
 
         // Save all new values in the right column
