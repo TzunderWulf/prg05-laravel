@@ -53,17 +53,15 @@
                                    class="btn btn-outline-primary w-100 mb-3">
                                     Read more <i class="bi bi-arrow-right-circle-fill"></i>
                                 </a>
-                                @if (Route::has('login'))
-                                    <a href="{{ route('character.favourite', ['character' => $character]) }}"
-                                       class="btn w-100 @if($character->users->contains(Auth::id()))
-                                           btn-warning @else btn-outline-warning @endif">
-                                        @if ($character->users->contains(Auth::id()))
-                                            Remove from favourites <i class="bi bi-star-fill"></i>
-                                        @else
-                                            Add to favourites <i class="bi bi-star"></i>
-                                        @endif
-                                    </a>
-                                @endif
+                                <a href="{{ route('character.favourite', ['character' => $character]) }}"
+                                   class="btn w-100 @if($character->users->contains(Auth::id()))
+                                       btn-warning @else btn-outline-warning @endif">
+                                    @if ($character->users->contains(Auth::id()))
+                                        Remove from favourites <i class="bi bi-star-fill"></i>
+                                    @else
+                                        Add to favourites <i class="bi bi-star"></i>
+                                    @endif
+                                </a>
                             </div>
                         </div>
                     </div>
