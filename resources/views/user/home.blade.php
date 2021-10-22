@@ -69,7 +69,7 @@
                                 </td>
                                 <td>{{ $createdCharacter->first_name }} {{ $createdCharacter->last_name }}</td>
                                 <td>
-                                    <a href="{{ route('edit', ['character' => $createdCharacter]) }}"
+                                    <a href="{{ route('character.edit', ['character' => $createdCharacter]) }}"
                                        class="btn btn-outline-primary">Edit character
                                         <i class="bi bi-pencil-fill"></i>
                                     </a>
@@ -127,7 +127,9 @@
                                            @endswitch
                                            >
                                 </div>
-                                <a href="" class="btn btn-outline-primary w-100">Edit user <i class="bi bi-pencil-fill"></i></a>
+                                <a href="/edit-user" class="btn btn-outline-primary w-100">
+                                    Edit user <i class="bi bi-pencil-fill"></i>
+                                </a>
                             </div>
                         </div>
                     @endauth

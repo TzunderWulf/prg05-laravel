@@ -68,7 +68,7 @@
                                     {{ $character->status ? 'checked' : '' }}>
                             </td>
                             <td>
-                                <a href="{{ route('edit', ['character' => $character]) }}" class="btn btn-outline-primary w-auto">
+                                <a href="{{ route('character.edit', ['character' => $character]) }}" class="btn btn-outline-primary w-auto">
                                     Edit character <i class="bi bi-pencil-fill"></i>
                                 </a>
                             </td>
