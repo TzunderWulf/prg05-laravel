@@ -16,7 +16,7 @@ class CharacterController extends Controller
 {
     public function index(Request $request)
     {
-        if (!$request['search'])
+        if (!$request['search'] && !$request['tags'])
         {
             // Get all characters out of database, whose status is active, if no search or tags is done/seen
             $characters = Character::all()
@@ -45,7 +45,7 @@ class CharacterController extends Controller
     public function show(Character $character)
     {
         // Get all the tags connected to the character
-        $tags = Character::find($character->id)->tags;
+        $tags = Character::findOrFail($character->id)->tags;
 
         // Return the  view with character data and related tags
         return view('character.character', compact('character', 'tags'));
@@ -70,7 +70,7 @@ class CharacterController extends Controller
     public function create()
     {
         // Validate if user is allowed on page, based on the amount of favorites or role
-        $amountFavorites = CharacterUser::all()->where('user_id', Auth::id());
+        $amountFavorites = User::findOrFail(Auth::id())->characters;
         if (count($amountFavorites) >= 5 || Auth::user()->role === 2)
         {
             return view('character.create');
@@ -89,8 +89,8 @@ class CharacterController extends Controller
             'region' => 'required',
             'element' => 'required',
             'birthday' => 'required|max:255',
-            'icon' => 'required|image|mimes:jpeg,png',
-            'portrait' => 'required|image|mimes:jpeg,png',
+            'icon' => 'required|image|mimes:jpeg,png,bmp|dimensions:min_width=280,min_height=280',
+            'portrait' => 'required|image|mimes:jpeg,png,bmp|dimensions:min_width=300,min_height=500',
             'tags' => 'required|max:255',
         ]);
 
@@ -126,14 +126,7 @@ class CharacterController extends Controller
                     'name' => $tagName
                 ]);
 
-                // Get tag_id and character_id, put them together in character_tag table
-                $connBetweenCharacterTag = new CharacterTag([
-                    'character_id' => $character->id,
-                    'tag_id' => $tag->id
-                ]);
-
-                // Save the connection between the character and tag
-                $connBetweenCharacterTag->save();
+                $tag->characters()->attach($character->id);
             }
             return redirect('/add')->with('status', 'Character added!');
         }
@@ -165,7 +158,7 @@ class CharacterController extends Controller
         if ($request['icon'] !== null)
         {
             $validatedIcon = $request->validate([
-                'icon' => 'required|image|mimes:jpeg,png'
+                'icon' => 'required|image|mimes:jpeg,png,bmp|dimensions:min_width=280,min_height=280'
             ]);
             $request->icon->store('uploads', 'public');
             $character->icon = $validatedIcon['icon']->hashName();
@@ -173,7 +166,7 @@ class CharacterController extends Controller
         if ($request['portrait'] !== null)
         {
             $validatedPortrait = $request->validate([
-                'portrait' => 'required|image|mimes:jpeg,png'
+                'portrait' => 'required|image|mimes:jpeg,png,bmp|dimensions:min_width=300,min_height=500'
             ]);
             $request->portrait->store('uploads', 'public');
             $character->portrait = $validatedPortrait['portrait']->hashName();
