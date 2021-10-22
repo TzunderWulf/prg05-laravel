@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\HomeController;
@@ -46,3 +47,10 @@ Route::get('/home', [HomeController::class, 'index'])
 Route::get('/admin-home', [CharacterController::class, 'showAdminDashboard'])
     ->middleware('auth')
     ->name('admin-home');
+Route::get('/edit-user', [UserController::class, 'edit'])
+    ->middleware('auth')
+    ->name('edit-user');
+Route::post('/update-user', [UserController::class, 'update'])
+    ->middleware('auth')
+    ->name('update-user');
+
