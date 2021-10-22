@@ -75,7 +75,7 @@ class CharacterController extends Controller
         {
             return view('character.create');
         }
-        return redirect('/');
+        abort(401);
     }
 
     public function store(Request $request)
@@ -146,7 +146,7 @@ class CharacterController extends Controller
         if (Auth::id() == $character->user_id || Auth::user()->role === 2){
             return view('character.edit', compact('character'));
         }
-        return redirect('/');
+        abort(401);
     }
 
     public function update(Character $character, Request $request)
@@ -216,7 +216,7 @@ class CharacterController extends Controller
 
             return view('user.admin-home', compact('latestChanges', 'characters'));
         }
-        return redirect('/');
+        abort(401);
     }
 
     public function storeFavourite(Character $character)
