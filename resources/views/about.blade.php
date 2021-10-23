@@ -38,12 +38,14 @@
                         playstyle that allows the player to swap between 4 individual characters in a party to quickly
                         combo attacks. Single-player gameplay is the focus of the game, with Co-Op Mode available for
                         certain activities.
-
+                    </p>
+                    <p>
                         Each character has two unique combat skills: an Elemental Skill and an Elemental Burst. The
                         elemental skill can be used at any time except for the cooldown period immediately after use,
                         while the elemental burst has an energy cost, requiring the user to amass sufficient energy
                         first.
-
+                    </p>
+                    <p>
                         Characters have control over one of seven natural elements: Cryo, Dendro, Pyro, Hydro, Anemo,
                         Electro, and Geo. Cooking is another significant aspect of Genshin Impact's gameplay. Players
                         gather many resources in the course of their adventure, some of which can be turned into dishes
