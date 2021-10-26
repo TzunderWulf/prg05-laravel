@@ -93,7 +93,7 @@
                             <input class="form-control" type="text" name="tags" placeholder="e.g. tag-1, tag-2"
                                    aria-label="Tags, separate tags with a comma" aria-describedby="tags" required>
                         </div>
-                        <p class="fst-italic">Seperate tags with comma, like so: Mondstadt, Male, Pyro</p>
+                        <p class="fst-italic">Separate tags with comma's (no spaces), like so: Mondstadt,Male,Pyro</p>
                     </div>
 
                     <div class="mb-3">
