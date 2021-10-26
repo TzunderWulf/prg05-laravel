@@ -29,22 +29,25 @@
                         <span class="input-group-text fw-bold" id="first-name">First name*:</span>
                         <input class="form-control" type="text" name="first-name"
                                placeholder="e.g. Diluc" aria-label="First name" aria-describedby="first-name"
-                               required>
+                               value=" {{ old('first-name') }}" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold" id="last-name">Last name:</span>
                         <input class="form-control" type="text" name="last-name"
-                               placeholder="e.g. Ragnvindr" aria-label="Last name" aria-describedby="last-name">
+                               placeholder="e.g. Ragnvindr" aria-label="Last name" aria-describedby="last-name"
+                               value=" {{ old('last-name') }}">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold" id="title">Secondary title*:</span>
                         <input class="form-control" type="text" name="title"
                                placeholder="e.g. The Dark Side of Dawn" aria-label="Secondary title"
-                               aria-describedby="title" required>
+                               aria-describedby="title" value="{{ old('title') }}" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold">Description*:</span>
-                        <textarea class="form-control" name="description" aria-label="Description" required></textarea>
+                        <textarea class="form-control" name="description" aria-label="Description" required>
+                            {{ old('description') }}
+                        </textarea>
                     </div>
                     <div class="mb-3">
                         <p class="fw-bold" id="region">Select the region, the character resides*:</p>
@@ -73,7 +76,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text fw-bold" id="birthday">Birthday*:</span>
                         <input class="form-control" type="text" name="birthday" placeholder="e.g. April 30th"
-                               aria-label="Birthday" aria-describedby="birthday" required>
+                               aria-label="Birthday" aria-describedby="birthday" value="{{ old('birthday') }}" required>
                     </div>
                     <div class="mb-4">
                         <div class="mb-3">
@@ -91,7 +94,8 @@
                         <div class="input-group">
                             <span class="input-group-text fw-bold" id="tags">Tags*:</span>
                             <input class="form-control" type="text" name="tags" placeholder="e.g. tag-1, tag-2"
-                                   aria-label="Tags, separate tags with a comma" aria-describedby="tags" required>
+                                   aria-label="Tags, separate tags with a comma" aria-describedby="tags"
+                                   value="{{ old('tags') }}" required>
                         </div>
                         <p class="fst-italic">Separate tags with comma's (no spaces), like so: Mondstadt,Male,Pyro</p>
                     </div>
