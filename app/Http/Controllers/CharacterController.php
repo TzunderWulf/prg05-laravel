@@ -10,17 +10,34 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class CharacterController extends Controller
 {
     public function index(Request $request)
     {
+        // Get back the five newest tags added to the database
+        $newestTags = Tag::latest()->take(5)->get();
         if (!$request['search'] && !$request['tags'])
         {
             // Get all characters out of database, whose status is active, if no search or tags is done/seen
             $characters = Character::all()
                 ->where('status', '=', 1);
+        }
+        elseif ($request['tags'])
+        {
+            $validated = $request->validate([
+                'tags' => ['array']
+            ]);
+
+            $ids = $validated['tags'];
+
+            $characters = Character::has('tags', '>=', 0)
+                ->whereHas('tags', function(Builder $query) use ($ids) {
+                    $query->whereIn('tags.id', $ids);
+                }, '>=', count($ids))
+                ->get();
         }
         else
         {
@@ -31,14 +48,12 @@ class CharacterController extends Controller
 
             // Do a query, based on the search
             $characters = Character::where('status', '=', 1)
-                ->where('region', 'like', '%'.$validated['search'].'%')
-                ->orWhere('first_name', 'like', '%'.$validated['search'].'%')
+                ->where('first_name', 'like', '%'.$validated['search'].'%')
                 ->orWhere('element', 'like', '%'.$validated['search'].'%')
+                ->orWhere('description', 'like', '%'.$validated['search'].'%')
                 ->get();
         }
-        // Get back the five newest tags added to the database
-        $newestTags = Tag::latest()->take(5)->get();
-
+        $request->flash();
         return view('character.characters', compact('characters', 'newestTags'));
     }
 
@@ -89,14 +104,14 @@ class CharacterController extends Controller
             'region' => 'required',
             'element' => 'required',
             'birthday' => 'required|max:255',
-            'icon' => 'required|image|mimes:jpeg,png,bmp|dimensions:min_width=280,min_height=280',
-            'portrait' => 'required|image|mimes:jpeg,png,bmp|dimensions:min_width=300,min_height=500',
+            'icon' => 'required|image|mimes:jpeg,png,bmp',
+            'portrait' => 'required|image|mimes:jpeg,png,bmp',
             'tags' => 'required|max:255',
         ]);
 
         // Save the file locally in the storage/public folder in an uploads folder
-        $request->icon->store('uploads', 'public');
-        $request->portrait->store('uploads', 'public');
+        $validated['icon']->store('uploads', 'public');
+        $validated['portrait']->store('uploads', 'public');
 
         $userId = Auth::id();
 
@@ -158,17 +173,17 @@ class CharacterController extends Controller
         if ($request['icon'] !== null)
         {
             $validatedIcon = $request->validate([
-                'icon' => 'required|image|mimes:jpeg,png,bmp|dimensions:min_width=280,min_height=280'
+                'icon' => 'required|image|mimes:jpeg,png,bmp'
             ]);
-            $request->icon->store('uploads', 'public');
+            $validatedIcon['icon']->store('uploads', 'public');
             $character->icon = $validatedIcon['icon']->hashName();
         }
         if ($request['portrait'] !== null)
         {
             $validatedPortrait = $request->validate([
-                'portrait' => 'required|image|mimes:jpeg,png,bmp|dimensions:min_width=300,min_height=500'
+                'portrait' => 'required|image|mimes:jpeg,png,bmp'
             ]);
-            $request->portrait->store('uploads', 'public');
+            $validatedPortrait['portrait']->store('uploads', 'public');
             $character->portrait = $validatedPortrait['portrait']->hashName();
         }
 
