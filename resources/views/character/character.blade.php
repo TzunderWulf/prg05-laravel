@@ -8,7 +8,7 @@
                 <p>{{ $character->description }}</p>
                 @if(count($tags) !== 0)
                     @foreach($tags as $tag)
-                        <a href="" class="btn btn-primary">{{ $tag->name }}</a>
+                        <a href="http://127.0.0.1:8000/characters?tags%5B%5D={{$tag->id}}" class="btn btn-primary">{{ $tag->name }}</a>
                     @endforeach
                 @endif
             </div>
