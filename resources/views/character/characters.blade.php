@@ -8,14 +8,18 @@
         </div>
         <div class="row mx-auto mb-5">
             <div class="col col-auto">
-                <form class="row">
+                <form id="tags-filter" class="row">
                     @foreach ($newestTags as $tag)
                         <div class="col">
-                            <input type="checkbox" class="btn-check" id="tag-{{$tag->id}}" value="{{$tag->name}}"
-                                   autocomplete="off">
-                            <label class="btn btn-outline-primary" for="tag-{{$tag->id}}">{{$tag->name}}</label>
+                            <input type="checkbox" class="btn-check tag" name="tags[]" id="tag-{{$loop->iteration}}"
+                                   value="{{$tag->id}}" autocomplete="off"
+                                   @if(is_array(old('tags')) && in_array($tag->id, old('tags'))) checked @endif>
+                            <label class="btn btn-outline-primary" for="tag-{{$loop->iteration}}">{{$tag->name}}</label>
                         </div>
                     @endforeach
+                    <div class="col">
+                        <input type="submit" class="btn btn-outline-success" value="Filter">
+                    </div>
                 </form>
             </div>
             <div class="col">
@@ -23,7 +27,7 @@
                     <div class="col input-group border-start border-primary border-3">
                         <span class="input-group-text" id="search"><i class="bi bi-search"></i></span>
                         <input type="text" class="form-control" aria-label="Search for tag" aria-describedby="search"
-                               name="search">
+                               name="search" placeholder="Search for name, element or words in the description...">
                     </div>
                     <div class="col">
                         <input type="submit" class="btn btn-outline-success" value="Search">
