@@ -47,12 +47,18 @@
                     <h1 class="h2">Created characters</h1>
                     <h2 class="h5 mb-3">All characters created by user: {{ Auth::user()->name }}</h2>
                 </div>
+                @if(session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 @if (count($createdCharacters) > 0)
                     <table id="createdCharacterTable" class="table table-hover table-responsive align-middle">
                         <thead>
                         <tr>
                             <th scope="col" class="w-25"></th>
                             <th scope="col">Name</th>
+                            <th scope="col"></th>
                             <th scope="col"></th>
                             <th scope="col" class="text-center">Active?</th>
                         </tr>
@@ -72,6 +78,12 @@
                                     <a href="{{ route('character.edit', ['character' => $createdCharacter]) }}"
                                        class="btn btn-outline-primary">Edit character
                                         <i class="bi bi-pencil-fill"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ route('character.delete', ['character' => $createdCharacter]) }}"
+                                       class="btn btn-outline-danger">Delete character
+                                        <i class="bi bi-trash-fill"></i>
                                     </a>
                                 </td>
                                 <td>
