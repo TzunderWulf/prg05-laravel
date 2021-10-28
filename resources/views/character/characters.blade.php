@@ -12,7 +12,7 @@
                     @foreach ($newestTags as $tag)
                         <div class="col">
                             <input type="checkbox" class="btn-check tag" name="tags[]" id="tag-{{$loop->iteration}}"
-                                   value="{{$tag->id}}" autocomplete="off"
+                                   value="{{$tag->id}}" autocomplete="off" required
                                    @if(is_array(old('tags')) && in_array($tag->id, old('tags'))) checked @endif>
                             <label class="btn btn-outline-primary" for="tag-{{$loop->iteration}}">{{$tag->name}}</label>
                         </div>
@@ -27,7 +27,8 @@
                     <div class="col input-group border-start border-primary border-3">
                         <span class="input-group-text" id="search"><i class="bi bi-search"></i></span>
                         <input type="text" class="form-control" aria-label="Search for tag" aria-describedby="search"
-                               name="search" placeholder="Search for name, element or words in the description...">
+                               name="search" placeholder="Search for name, element or words in the description..."
+                               required>
                     </div>
                     <div class="col">
                         <input type="submit" class="btn btn-outline-success" value="Search">
