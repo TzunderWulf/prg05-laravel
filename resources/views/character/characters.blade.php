@@ -12,7 +12,7 @@
                     @foreach ($newestTags as $tag)
                         <div class="col">
                             <input type="checkbox" class="btn-check tag" name="tags[]" id="tag-{{$loop->iteration}}"
-                                   value="{{$tag->id}}" autocomplete="off" required
+                                   value="{{$tag->id}}" autocomplete="off"
                                    @if(is_array(old('tags')) && in_array($tag->id, old('tags'))) checked @endif>
                             <label class="btn btn-outline-primary" for="tag-{{$loop->iteration}}">{{$tag->name}}</label>
                         </div>
