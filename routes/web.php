@@ -33,6 +33,11 @@ Route::middleware('auth')->group(function() {
     Route::post('/store-edit/{character}', [CharacterController::class, 'update'])
         ->name('store-edit');
 
+    Route::get('/delete/{character}', [CharacterController::class, 'delete'])
+        ->name('character.delete');
+    Route::post('/remove/{character}', [CharacterController::class, 'remove'])
+        ->name('remove');
+
     Route::post('/change-status', [CharacterController::class, 'changeStatus'])
         ->name('change-status');
 
