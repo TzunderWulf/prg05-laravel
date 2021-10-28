@@ -55,6 +55,7 @@
                         <th scope="col">Status</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,6 +71,12 @@
                             <td>
                                 <a href="{{ route('character.edit', ['character' => $character]) }}" class="btn btn-outline-primary w-auto">
                                     Edit character <i class="bi bi-pencil-fill"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('character.delete', ['character' => $character]) }}"
+                                   class="btn btn-outline-danger">Delete character
+                                    <i class="bi bi-trash-fill"></i>
                                 </a>
                             </td>
                             <td>
