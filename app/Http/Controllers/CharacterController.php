@@ -202,6 +202,30 @@ class CharacterController extends Controller
         return redirect()->route('character.edit', ['character' => $character])->with('status', 'Something went wrong, try again.');
     }
 
+    public function delete(Character $character)
+    {
+        // Check if user is creator or admin
+        if ($character->user_id === Auth::id() || Auth::user()->role === 2)
+        {
+            return view('character.delete', compact('character'));
+        }
+        abort(401);
+    }
+
+    public function remove(Character $character)
+    {
+        // Remove all constraints, such as tags and users (that have this character as a favourite )
+        $character->users()->detach();
+        $character->tags()->detach();
+
+        // Remove the character
+        $character->delete();
+
+        return redirect()
+            ->route('home')
+            ->with('status', 'Character has been deleted.');
+    }
+
     public function changeStatus(Request $request)
     {
         $character = Character::findOrFail($request['character-id']);
