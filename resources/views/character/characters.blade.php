@@ -6,11 +6,11 @@
             <h1>All characters currently in the archive</h1>
             <h2 class="h5">Total amount: {{ count($characters) }}</h2>
         </div>
-        <div class="row mx-auto mb-5">
-            <div class="col col-auto">
+        <div class="row w-100">
+            <div class="col w-50">
                 <form id="tags-filter" class="row">
                     @foreach ($newestTags as $tag)
-                        <div class="col">
+                        <div class="col text-center">
                             <input type="checkbox" class="btn-check tag" name="tags[]" id="tag-{{$loop->iteration}}"
                                    value="{{$tag->id}}" autocomplete="off"
                                    @if(is_array(old('tags')) && in_array($tag->id, old('tags'))) checked @endif>
