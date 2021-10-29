@@ -22,7 +22,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col">
+            <div class="col w-50">
                 <form method="get" action="" class="row">
                     <div class="col input-group border-start border-primary border-3">
                         <span class="input-group-text" id="search"><i class="bi bi-search"></i></span>
@@ -30,7 +30,7 @@
                                name="search" placeholder="Search for name, element or words in the description..."
                                required>
                     </div>
-                    <div class="col">
+                    <div class="col col-auto">
                         <input type="submit" class="btn btn-outline-success" value="Search">
                     </div>
                 </form>
