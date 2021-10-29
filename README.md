@@ -1,10 +1,10 @@
-#PRG05 Laravel
+# PRG05 Laravel
 
-##Description
+## Description
 Project for PRG05, using the Laravel framework. Built a archive for the open-world RPG game: Genshin Impact as a 
 school project.
 
-##Requirements for project
+## Requirements for project
 Short list of requirement that had to be in the assignment.
 - Some functionalities are only available for logged-in users:
 - Validation at all forms;
