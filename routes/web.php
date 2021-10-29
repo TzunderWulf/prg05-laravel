@@ -25,17 +25,23 @@ Route::get('/characters/{character}', [CharacterController::class, 'show'])
     ->name('character.show');
 
 Route::middleware('auth')->group(function() {
-    Route::get('/add', [CharacterController::class, 'create']);
-    Route::post('/store-form', [CharacterController::class, 'store']);
+    Route::get('/add', [CharacterController::class, 'create'])
+        ->middleware('throttle:60,1');
+    Route::post('/store-form', [CharacterController::class, 'store'])
+        ->middleware('throttle:60,1');
 
     Route::get('/edit/{character}', [CharacterController::class, 'edit'])
+        ->middleware('throttle:60,1')
         ->name('character.edit');
     Route::post('/store-edit/{character}', [CharacterController::class, 'update'])
+        ->middleware('throttle:60,1')
         ->name('store-edit');
 
     Route::get('/delete/{character}', [CharacterController::class, 'delete'])
+        ->middleware('throttle:60,1')
         ->name('character.delete');
     Route::post('/remove/{character}', [CharacterController::class, 'remove'])
+        ->middleware('throttle:60,1')
         ->name('remove');
 
     Route::post('/change-status', [CharacterController::class, 'changeStatus'])
@@ -48,9 +54,10 @@ Route::middleware('auth')->group(function() {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])
+    ->middleware('throttle:60,1')
     ->name('home');
 Route::get('/admin-home', [CharacterController::class, 'showAdminDashboard'])
-    ->middleware('auth')
+    ->middleware('auth', 'throttle:60,1')
     ->name('admin-home');
 Route::get('/edit-user', [UserController::class, 'edit'])
     ->middleware('auth')
