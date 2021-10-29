@@ -34,7 +34,7 @@
                         <span class="input-group-text" id="search"><i class="bi bi-search"></i></span>
                         <input type="text" class="form-control" aria-label="Search for tag" aria-describedby="search"
                                name="search" placeholder="Search for name, element or words in the description..."
-                               required>
+                               value="{{ old('search') }}" required>
                     </div>
                     <div class="col col-auto">
                         <input type="submit" class="btn btn-outline-success" value="Search">
