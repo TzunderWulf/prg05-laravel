@@ -54,7 +54,7 @@ class CharacterController extends Controller
                 ->get();
         }
         $request->flash();
-        return view('character.characters', compact('characters', 'newestTags'));
+        return view('character.index-characters', compact('characters', 'newestTags'));
     }
 
     public function show(Character $character)
