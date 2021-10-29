@@ -4,7 +4,6 @@
 Project for PRG05, using the Laravel framework. Built a archive for the open-world RPG game: Genshin Impact as a 
 school project.
 
-
 ##Requirements for project
 Short list of requirement that had to be in the assignment.
 - Some functionalities are only available for logged-in users:
@@ -19,3 +18,6 @@ Short list of requirement that had to be in the assignment.
     - Separate action in a controller;
     - Is allowed via AJAX.
 - User is allowed only to do certain things, when they have completed an action (example: logged in on five different days)
+
+*Disclaimer: all characters, images and data belong to MiHoYo, this a mere fan/school project and has no relations to 
+the company or Genshin Impact.*
