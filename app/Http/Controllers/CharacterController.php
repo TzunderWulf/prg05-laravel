@@ -85,8 +85,7 @@ class CharacterController extends Controller
     public function create()
     {
         // Validate if user is allowed on page, based on the amount of favorites or role
-        $amountFavorites = User::findOrFail(Auth::id())->characters;
-        if (count($amountFavorites) >= 5 || Auth::user()->role === 2)
+        if (User::findOrFail(Auth::id())->characters->count() >= 5 || Auth::user()->role === 2)
         {
             return view('character.create');
         }
