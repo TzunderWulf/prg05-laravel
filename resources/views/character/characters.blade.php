@@ -17,7 +17,7 @@
                             <label class="btn btn-outline-primary" for="tag-{{$loop->iteration}}">{{$tag->name}}</label>
                         </div>
                     @endforeach
-                    <div class="col">
+                    <div class="col text-center">
                         <input type="submit" class="btn btn-outline-success" value="Filter">
                     </div>
                 </form>
