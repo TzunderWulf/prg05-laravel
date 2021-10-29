@@ -9,17 +9,23 @@
         <div class="row w-100">
             <div class="col w-50">
                 <form id="tags-filter" class="row">
-                    @foreach ($newestTags as $tag)
+                    @if(count($newestTags) > 0)
+                        @foreach ($newestTags as $tag)
+                            <div class="col text-center">
+                                <input type="checkbox" class="btn-check tag" name="tags[]" id="tag-{{$loop->iteration}}"
+                                       value="{{$tag->id}}" autocomplete="off"
+                                       @if(is_array(old('tags')) && in_array($tag->id, old('tags'))) checked @endif>
+                                <label class="btn btn-outline-primary" for="tag-{{$loop->iteration}}">{{$tag->name}}</label>
+                            </div>
+                        @endforeach
                         <div class="col text-center">
-                            <input type="checkbox" class="btn-check tag" name="tags[]" id="tag-{{$loop->iteration}}"
-                                   value="{{$tag->id}}" autocomplete="off"
-                                   @if(is_array(old('tags')) && in_array($tag->id, old('tags'))) checked @endif>
-                            <label class="btn btn-outline-primary" for="tag-{{$loop->iteration}}">{{$tag->name}}</label>
+                            <input type="submit" class="btn btn-outline-success" value="Filter">
                         </div>
-                    @endforeach
-                    <div class="col text-center">
-                        <input type="submit" class="btn btn-outline-success" value="Filter">
-                    </div>
+                    @else
+                        <div class="col text-center">
+                            <p class="h5">No tags found yet...</p>
+                        </div>
+                    @endif
                 </form>
             </div>
             <div class="col w-50">
